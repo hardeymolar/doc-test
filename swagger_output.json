@@ -95,6 +95,141 @@
                 }
             }
         },
+        "/api/auth/verify-email": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "description": "Handles the verification and confirmation of the authenticity of a user's email address.",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "token": {
+                                    "type":"string",
+                                    "example":"42e2a46a-e56f-4e4d-be0e-0675b7026f58"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description":"Success, Successfully processed request."
+                    },
+                    "400": {
+                        "description":"Bad Request, The user sent an invalid request."
+                    },
+                    "404": {
+                        "description":"Not Found, User Not Found."
+                    },
+                    "500": {
+                        "description":"Internal Server Error, Error processing request from the server."
+                    }
+                }
+            }
+        },
+        "/api/auth/send-verification": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "description": "Sends verification code to the users email.",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "first_name": {
+                                    "type":"string",
+                                    "example":"john"
+                                },
+                                "last_name": {
+                                    "type":"string",
+                                    "example":"doe"
+                                },
+                                "username": {
+                                    "type":"string",
+                                    "example":"johndoe"
+                                },
+                                "email": {
+                                    "type":"string",
+                                    "example":"test@gmail.com"
+                                },
+                                "password": {
+                                    "type":"string",
+                                    "example":"myPassword2021"
+                                },
+                                "refresh_token": {
+                                    "type":"string",
+                                    "example":"42e2a46a-e56f-4e4d-be0e-0675b7026f58"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description":"Success, Successfully processed request."
+                    },
+                    "400": {
+                        "description":"Bad Request, The user sent an invalid request."
+                    },
+                    "404": {
+                        "description":"Not Found, User Not Found."
+                    },
+                    "500": {
+                        "description":"Internal Server Error, Error processing request from the server."
+                    }
+                }
+            }
+        },
+        "/api/auth/confirm-verification": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "description": "Verifing the verification code against the stored code in for user in the database",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "email": {
+                                    "type":"string",
+                                    "example":"test@gmail.com"
+                                },
+                                "verificationCode": {
+                                    "type":"string",
+                                    "example":"3903"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description":"Success, Successfully processed request."
+                    },
+                    "400": {
+                        "description":"Bad Request, The user sent an invalid request."
+                    },
+                    "404": {
+                        "description":"Not Found, User Not Found."
+                    },
+                    "500": {
+                        "description":"Internal Server Error, Error processing request from the server."
+                    }
+                }
+            }
+        },
         "/api/auth/login": {
             "post": {
                 "tags": [
@@ -207,43 +342,6 @@
                         "description":"Bad Request, The user sent an invalid request."
                     },
                     "500":{
-                        "description":"Internal Server Error, Error processing request from the server."
-                    }
-                }
-            }
-        },
-        "/api/auth/verify-email": {
-            "post": {
-                "tags": [
-                    "Auth"
-                ],
-                "description": "Handles the verification and confirmation of the authenticity of a user's email address.",
-                "parameters": [
-                    {
-                        "name": "body",
-                        "in": "body",
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "token": {
-                                    "type":"string",
-                                    "example":"42e2a46a-e56f-4e4d-be0e-0675b7026f58"
-                                }
-                            }
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description":"Success, Successfully processed request."
-                    },
-                    "400": {
-                        "description":"Bad Request, The user sent an invalid request."
-                    },
-                    "404": {
-                        "description":"Not Found, User Not Found."
-                    },
-                    "500": {
                         "description":"Internal Server Error, Error processing request from the server."
                     }
                 }
